@@ -1,13 +1,36 @@
-import React from 'react'
+import React,{useState} from 'react'
 
-function Formulario(){
+function Formulario({datosconsulta}){
+  //ya no se ocupa state
+  const [buscar, guardarBuscar] = useState({
+    ciudad:'',
+    pais: ''
+  })
+
+
   const handleChange = e =>{
     // Camniar State
+    guardarBuscar({
+      ...buscar,
+      [e.target.name]: e.target.value
+    })
+
+    
   }
+
+  const consultarclima= e =>{
+    e.preventDefault()
+
+    //pasar al componente princippal la busqueda
+    datosconsulta (buscar)
+
+  } 
 
 
   return (
-    <form>
+    <form
+      onSubmit={consultarclima}
+    >
       <div className="input-field col s12">
         <input 
         type="text"
